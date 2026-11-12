@@ -2,3 +2,5 @@ tar-ignore = backends/quest
 tar-ignore = obj-*
 tar-ignore = out
 tar-ignore = debian/xr-hand-backend-quest-dsp
+tar-ignore = .git
+tar-ignore = LICENSES
