@@ -42,7 +42,7 @@ shlibs 元数据；可显式提供 `XR_CROSS_LIBDIR`、`XR_CROSS_SHLIBS`。
 只注册一对左右手角色，避免两个来源争用同一角色。
 Shell 设置 `XR_SHELL_INPUT_MODE=hands` 时保留射线与落点，隐藏实体手柄外观；
 捏合沿现有触发动作选中/拖动，抓握沿 squeeze 动作执行 6DoF 抓取与双手缩放。
-系统保持原手柄配置可切换。首次接入不提供手部皮肤网格渲染。
+系统保持原手柄配置可切换。Shell 从标准关节绘制掌面、圆润指节与指骨表面；不嵌入厂商手部美术资产。
 
 ## 接口
 
@@ -62,7 +62,22 @@ Shell 设置 `XR_SHELL_INPUT_MODE=hands` 时保留射线与落点，隐藏实体
 21 个 landmark 顺序：thumb_tip, index_tip, middle_tip, ring_tip, pinky_tip,
 wrist, thumb_mcp, thumb_ip, index_mcp, index_pip, index_dip, middle_mcp,
 middle_pip, middle_dip, ring_mcp, ring_pip, ring_dip, pinky_mcp, pinky_pip,
-pinky_dip, palm_center。该接口不冒充 OpenXR 的 26 关节扩展。
+pinky_dip, palm_center。这是模型输出的组件间传输格式，v1 保持兼容；并非模型或权重的所有权声明。
+
+SDK 的 `joints.hpp` 将这些位置转换为 OpenXR 默认顺序的 26 关节。
+五个掌骨位置按已解码掌部几何估计，`Joint::inferred` 明确标记；
+朝向由掌背法向和相邻骨段建立，半径按掌宽估计。这五点不是新增神经检测结果。
+实际运行时由 Monado OpenVR 适配提供 31 根父坐标骨骼与独立原始 grip/aim，
+SteamVR 的 `XR_EXT_hand_tracking` 再提供标准 26 关节 API、半径、有效性和空间变换。
+适配声明 partial skeletal tracking，避免声称所有关节具有独立传感器精度。
+31 骨骼的掌腕偏移来自实测掌腕位置，不沿用实体手柄的默认手腕偏移。
+
+Shell 启用扩展后分别创建左右手 tracker，在同一 recenter 后空间与预测显示时间查询关节。
+模型与射线使用该空间，捏合/抓握沿已存在的 trigger/squeeze 6DoF 路由进入桌面，
+失踪时关节模型隐藏，动作释放并取消捕获；不会用默认张手姿态冒充有效追踪。
+
+标准参考：[Khronos 手关节接口](https://registry.khronos.org/OpenXR/specs/1.1/man/html/XrHandJointLocationEXT.html)、
+[Valve 31 骨骼约定](https://github.com/ValveSoftware/openvr/wiki/Hand-Skeleton)。
 
 保存画面可用于离线原权重解码与手势映射核对；replay 永不作为实时输入进入桌面。
 生产日志轮转到有限大小，默认不保存相机像素或神经中间张量。
