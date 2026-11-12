@@ -1,9 +1,16 @@
 #!/usr/bin/python3
-import argparse,json,socket,sys,time
+# SPDX-License-Identifier: MIT
+"""Read-only hand observer. This never starts tracking or opens a camera."""
+import argparse,json,os,socket,struct,sys,time
 sys.path.insert(0,'/usr/share/xr-hand-tracking/python')
 from xr_hand.protocol import decode,SIZE
-p=argparse.ArgumentParser();p.add_argument('--socket',default='/run/xr-hand-tracking/state.sock');p.add_argument('--samples',type=int,default=1);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--socket',default='/run/xr-hand-tracking/state.sock');p.add_argument('--samples',type=int,default=1);p.add_argument('--follow',action='store_true');a=p.parse_args()
+if a.samples<1:p.error('--samples must be positive')
 with socket.socket(socket.AF_UNIX,socket.SOCK_SEQPACKET) as s:
  s.settimeout(5);s.connect(a.socket)
- for _ in range(a.samples):
-  d=decode(s.recv(SIZE+1));d['received_boottime_ns']=time.clock_gettime_ns(time.CLOCK_BOOTTIME);d['expired']=d['received_boottime_ns']>=d['valid_until_boottime_ns'];print(json.dumps(d),flush=True)
+ if struct.unpack('3i',s.getsockopt(socket.SOL_SOCKET,socket.SO_PEERCRED,12))[1]!=0:raise PermissionError('Hand publisher must be root')
+ count=0
+ while a.follow or count<a.samples:
+  raw=s.recv(SIZE+1)
+  if not raw:break
+  d=decode(raw);d['observer_schema']=1;d['received_boottime_ns']=time.clock_gettime_ns(time.CLOCK_BOOTTIME);d['expired']=d['received_boottime_ns']>=d['valid_until_boottime_ns'];print(json.dumps(d,allow_nan=False),flush=True);count+=1

@@ -7,6 +7,8 @@ Type=simple
 ExecStart=/usr/bin/xr-hand-trackingd --config /etc/xr/hand-tracking.json
 RuntimeDirectory=xr-hand-tracking
 RuntimeDirectoryMode=0755
+# The head producer owns the camera tap beneath this shared namespace.
+RuntimeDirectoryPreserve=yes
 LogsDirectory=xr-hand-tracking
 LogsDirectoryMode=0750
 UMask=0022

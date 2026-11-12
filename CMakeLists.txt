@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(xr_hand_tracking VERSION 0.1.1 LANGUAGES NONE)
+project(xr_hand_tracking VERSION 0.1.2 LANGUAGES NONE)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 add_library(xr_hand_api INTERFACE)

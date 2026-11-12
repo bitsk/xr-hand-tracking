@@ -84,3 +84,8 @@ Shell 启用扩展后分别创建左右手 tracker，在同一 recenter 后空�
 
 调试配置 `exercise_inactive: true` 可在无手时用真实当前像素执行全部子图，
 输出仍标为无效；用于测量计算链路，正常配置应保持关闭。
+
+`xr-hand-status --follow` 输出凭据校验后的只读 JSON 行供调试后端订阅；
+`observer_schema=1`，时间为 CLOCK_BOOTTIME，不打开相机或启动服务。
+安装及升级均不自动启停运行中的手服务；会话管理器负责切换。
+RuntimeDirectory 保留父目录，手消费者退出不删除头生产者拥有的相机 tap。
