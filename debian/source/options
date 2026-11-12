@@ -1,6 +1,13 @@
-tar-ignore = backends/quest
+tar-ignore = .git
+tar-ignore = backends
 tar-ignore = obj-*
 tar-ignore = out
+tar-ignore = debian/.debhelper
+tar-ignore = debian/xr-hand-tracking
+tar-ignore = debian/libxr-hand-dev
 tar-ignore = debian/xr-hand-backend-quest-dsp
-tar-ignore = .git
-tar-ignore = LICENSES
+tar-ignore = debian/tmp
+tar-ignore = debian/files
+tar-ignore = debian/*-stamp
+tar-ignore = debian/*.substvars
+tar-ignore = debian/*.debhelper*

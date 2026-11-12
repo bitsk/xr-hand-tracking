@@ -1,2 +1,9 @@
-tar-ignore = obj-*
 tar-ignore = .git
+tar-ignore = obj-*
+tar-ignore = debian/.debhelper
+tar-ignore = debian/xr-hand-backend-quest-dsp
+tar-ignore = debian/tmp
+tar-ignore = debian/files
+tar-ignore = debian/*-stamp
+tar-ignore = debian/*.substvars
+tar-ignore = debian/*.debhelper*
