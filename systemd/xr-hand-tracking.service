@@ -7,7 +7,7 @@ Type=simple
 ExecStart=/usr/bin/xr-hand-trackingd --config /etc/xr/hand-tracking.json
 RuntimeDirectory=xr-hand-tracking
 RuntimeDirectoryMode=0755
-# The head producer owns the camera tap beneath this shared namespace.
+# Keep the IPC namespace across consumer updates; listeners belong to this service.
 RuntimeDirectoryPreserve=yes
 LogsDirectory=xr-hand-tracking
 LogsDirectoryMode=0750
