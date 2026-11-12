@@ -37,7 +37,7 @@ inline bool joints(const xr_hand_state &h,Joints &out){
     Vec dorsal=scale(cross(sub(p[7],p[1]),sub(p[22],p[1])),h.hand?1.f:-1.f);if(!unit(dorsal))return false;
     for(unsigned j=0;j<26;++j){
         unsigned next=j<2?12:j==5?5:j==10?10:j==15?15:j==20?20:j==25?25:j+1;
-        Vec distal=next==j?sub(p[j],p[j-1]):sub(p[next],p[j]);if(!unit(distal))return false;
+        Vec distal=j<2?sub(p[12],p[1]):next==j?sub(p[j],p[j-1]):sub(p[next],p[j]);if(!unit(distal))return false;
         Vec z=scale(distal,-1),x=cross(dorsal,z);if(!unit(x))return false;Vec y=cross(z,x);auto q=orientation(x,y,z);
         auto &v=out[j];std::copy(p[j].begin(),p[j].end(),v.pose.begin());std::copy(q.begin(),q.end(),v.pose.begin()+3);
         v.inferred=landmark[j]<0;v.radius=width*(j<2?.21f:(j==5||j==10||j==15||j==20||j==25)?.075f:.105f);
