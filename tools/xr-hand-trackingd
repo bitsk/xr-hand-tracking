@@ -1,0 +1,5 @@
+#!/usr/bin/python3
+import sys
+sys.path.insert(0,'/usr/share/xr-hand-tracking/python')
+from xr_hand.service import main
+main()

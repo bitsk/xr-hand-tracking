@@ -1,0 +1,5 @@
+xr-hand-backend-quest-dsp (0.1.0) unstable; urgency=medium
+
+  * Package optional DSP backend separately from free IPC and session service.
+
+ -- bits <bigbits@hackx.cc>  Thu, 12 Nov 2026 10:26:00 +0800

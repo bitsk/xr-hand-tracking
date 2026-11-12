@@ -1,0 +1,4 @@
+Core service, hand IPC, camera preprocessing and worker integration: MIT.
+DSP client (separate FastRPC process): GPL-3.0-or-later.
+Quest host decoder adaptations: CC BY-NC 4.0, copyright Meta Platforms, Inc.
+and affiliates; see NOTICE and LICENSES. Proprietary payloads are excluded.

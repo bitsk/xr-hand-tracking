@@ -1,0 +1,17 @@
+[Unit]
+Description=XR shared-camera hand tracking and gesture service
+ConditionPathExists=/etc/xr/hand-tracking.json
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/xr-hand-trackingd --config /etc/xr/hand-tracking.json
+RuntimeDirectory=xr-hand-tracking
+RuntimeDirectoryMode=0755
+LogsDirectory=xr-hand-tracking
+LogsDirectoryMode=0750
+UMask=0022
+KillMode=mixed
+TimeoutStopSec=15
+Restart=no
+
+# Session/profile activation is explicit; installation never starts cameras.

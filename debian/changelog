@@ -1,0 +1,5 @@
+xr-hand-tracking (0.1.0) unstable; urgency=medium
+
+  * Add hand IPC and session service with a separately sourced optional DSP backend.
+
+ -- bits <bigbits@hackx.cc>  Thu, 12 Nov 2026 10:26:00 +0800

@@ -1,0 +1,1387 @@
+{
+  "ptl_sha256": "028591fe66375dcdb42b0a969536d525e41db365ea58ac0dd05787a28eabf807",
+  "constants": {
+    "c0": {
+      "kind": "linear",
+      "weight": "c0_weight",
+      "bias": "c0_bias",
+      "output_min": null,
+      "output_max": null
+    },
+    "c1": {
+      "kind": "linear",
+      "weight": "c1_weight",
+      "bias": "c1_bias",
+      "output_min": null,
+      "output_max": null
+    },
+    "c2": {
+      "kind": "tensor",
+      "value": "c2"
+    },
+    "c3": {
+      "kind": "tensor",
+      "value": "c3"
+    },
+    "c4": {
+      "kind": "tensor",
+      "value": "c4"
+    },
+    "c5": {
+      "kind": "tensor",
+      "value": "c5"
+    },
+    "c6": {
+      "kind": "conv2d",
+      "weight": "c6_weight",
+      "bias": "c6_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        0,
+        0
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": 0.0,
+      "output_max": null
+    },
+    "c7": {
+      "kind": "conv2d",
+      "weight": "c7_weight",
+      "bias": "c7_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        0,
+        0
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": 0.0,
+      "output_max": null
+    },
+    "c8": {
+      "kind": "conv2d",
+      "weight": "c8_weight",
+      "bias": "c8_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        0,
+        0
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": null,
+      "output_max": null
+    },
+    "c9": {
+      "kind": "conv2d",
+      "weight": "c9_weight",
+      "bias": "c9_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        1,
+        1
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": 0.0,
+      "output_max": null
+    },
+    "c10": {
+      "kind": "conv2d",
+      "weight": "c10_weight",
+      "bias": "c10_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        1,
+        1
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": null,
+      "output_max": null
+    },
+    "c11": {
+      "kind": "conv2d",
+      "weight": "c11_weight",
+      "bias": "c11_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        1,
+        1
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": 0.0,
+      "output_max": null
+    },
+    "c12": {
+      "kind": "conv2d",
+      "weight": "c12_weight",
+      "bias": "c12_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        1,
+        1
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": null,
+      "output_max": null
+    },
+    "c13": {
+      "kind": "conv2d",
+      "weight": "c13_weight",
+      "bias": "c13_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        0,
+        0
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": null,
+      "output_max": null
+    },
+    "c14": {
+      "kind": "conv2d",
+      "weight": "c14_weight",
+      "bias": "c14_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        0,
+        0
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": 0.0,
+      "output_max": null
+    },
+    "c15": {
+      "kind": "conv2d",
+      "weight": "c15_weight",
+      "bias": "c15_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        0,
+        0
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": null,
+      "output_max": null
+    },
+    "c16": {
+      "kind": "conv2d",
+      "weight": "c16_weight",
+      "bias": "c16_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        0,
+        0
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": null,
+      "output_max": null
+    },
+    "c17": {
+      "kind": "conv2d",
+      "weight": "c17_weight",
+      "bias": "c17_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        1,
+        1
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": 0.0,
+      "output_max": null
+    },
+    "c18": {
+      "kind": "conv2d",
+      "weight": "c18_weight",
+      "bias": "c18_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        1,
+        1
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": null,
+      "output_max": null
+    },
+    "c19": {
+      "kind": "conv2d",
+      "weight": "c19_weight",
+      "bias": "c19_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        1,
+        1
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": 0.0,
+      "output_max": null
+    },
+    "c20": {
+      "kind": "conv2d",
+      "weight": "c20_weight",
+      "bias": "c20_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        1,
+        1
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": null,
+      "output_max": null
+    },
+    "c21": {
+      "kind": "conv2d",
+      "weight": "c21_weight",
+      "bias": "c21_bias",
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        0,
+        0
+      ],
+      "dilation": [
+        1,
+        1
+      ],
+      "groups": 1,
+      "output_min": null,
+      "output_max": null
+    }
+  },
+  "weights_modified": false,
+  "source": "DPEV30MG.ptl archive/constants.pkl and data.pkl; no firmware-defined code executed",
+  "attributes_msgpack": {
+    "sigma_scales": {
+      "MixedV_GT_SKEL": [
+        1.2887570460281272,
+        1.2691485006621783,
+        1.1298676666339824,
+        1.0626915623035444,
+        1.1052034265091428,
+        1.5227242574963158,
+        1.2458368550147467,
+        1.3170386680873725,
+        1.6324922508101534,
+        1.3529147330898734,
+        1.3430086739975067,
+        1.6443236957407588,
+        1.3107751141822903,
+        1.2620306982628053,
+        1.6379443860770937,
+        1.167503225599593,
+        1.1542788129860424,
+        1.6207082247283444,
+        1.1261963452610237,
+        1.1211094137963906,
+        1.5139127660045995,
+        1.324933954240197
+      ],
+      "SingleV_GT_SKEL": [
+        1.293537542752699,
+        1.2915545329656275,
+        1.1496560612813729,
+        1.0675367797582533,
+        1.1160612950260347,
+        1.8452788733818886,
+        1.2297550211068091,
+        1.3105128307610814,
+        1.8657196288759896,
+        1.342314385158297,
+        1.3534586783877947,
+        1.8865634159819873,
+        1.298721129326958,
+        1.2696025195626188,
+        1.888523390800052,
+        1.1369609294487628,
+        1.1378935949601516,
+        1.877355161903038,
+        1.1094416155126472,
+        1.1230695166879314,
+        1.758202632264779,
+        1.3830707883046962
+      ],
+      "MultiV_GT_SKEL": [
+        1.2889670513318736,
+        1.261576039522014,
+        1.121492526194015,
+        1.0600431189828674,
+        1.1002715332824178,
+        1.4974712655276428,
+        1.2514597547434758,
+        1.3210556217671299,
+        1.6046684497522068,
+        1.353522948002534,
+        1.338369761203436,
+        1.6181809861260446,
+        1.3089165483253409,
+        1.2566825212696073,
+        1.613627199111626,
+        1.1673156114351426,
+        1.1531209268731475,
+        1.5967839246842648,
+        1.129200327382947,
+        1.1197907562579184,
+        1.49043779151297,
+        1.316959323328583
+      ],
+      "MultiV_PredS": [
+        1.2146529562721968,
+        1.2181482933700807,
+        1.1041442956959082,
+        1.0630753819102785,
+        1.0751855708346802,
+        1.6206001546001894,
+        1.1861322591319143,
+        1.256585892473059,
+        1.5380558363541077,
+        1.3244360992723678,
+        1.2787133156524004,
+        1.5307211109591234,
+        1.2169531398279836,
+        1.187115824798033,
+        1.5267637475074405,
+        1.1636902926240436,
+        1.1119060886337495,
+        1.5375065103194419,
+        1.1111703775261348,
+        1.105154727748692,
+        1.3157116360090633,
+        1.267195857248665
+      ],
+      "MultiV_Use_PredS": [
+        1.1908818229230778,
+        1.148060622692043,
+        1.0552076930327376,
+        1.04745891191274,
+        1.0605582328368297,
+        1.6399864201631937,
+        1.2665276798510652,
+        1.2754903938861786,
+        1.5025515957048157,
+        1.3821718975376949,
+        1.252731631865408,
+        1.5047101678914336,
+        1.2818769110703858,
+        1.1767962562622358,
+        1.5282518166022192,
+        1.2599468322767173,
+        1.1308413718067047,
+        1.5615333961667306,
+        1.2144396450314936,
+        1.1244907317546529,
+        1.4159882637600996,
+        1.283057062673122
+      ],
+      "MixedV_Use_PredS": [
+        1.1915386167564146,
+        1.1559498592606408,
+        1.0650441551910812,
+        1.0515401183871378,
+        1.066119998553826,
+        1.6704990854614494,
+        1.2564852643420528,
+        1.2752275171337828,
+        1.5336665039015573,
+        1.3767612219914824,
+        1.2554875730409023,
+        1.5399221058810493,
+        1.284479427397603,
+        1.1861809007968698,
+        1.5631453193989084,
+        1.2584615404284791,
+        1.1336890755401918,
+        1.593377221901736,
+        1.2097867981191854,
+        1.1262559525846296,
+        1.445331975014711,
+        1.2924903216122126
+      ],
+      "SingleV_Use_PredS": [
+        1.1971785086111693,
+        1.167352332909212,
+        1.076886767047771,
+        1.0502412505587726,
+        1.0664598762939914,
+        1.9033375563584887,
+        1.2267198338382703,
+        1.2675528325686611,
+        1.635869703103626,
+        1.3335654460017803,
+        1.2467001640736552,
+        1.7008131931100152,
+        1.248679936282384,
+        1.1816651621918222,
+        1.763316161110062,
+        1.2096938417188456,
+        1.1160371492315095,
+        1.801589130080034,
+        1.1629978540809307,
+        1.1119999809221424,
+        1.6022581504733668,
+        1.321624852415367
+      ]
+    },
+    "image_size": [
+      96,
+      96
+    ],
+    "use_uint8_input": true
+  },
+  "model_attributes": {
+    "_num_views": 2,
+    "_output_fields": [
+      "joint_angles",
+      "wrist_xfs",
+      "skel_scales",
+      "shape_params",
+      "landmark_uncertainty_sigmas"
+    ],
+    "_output_mv_img_features": true,
+    "_mv_fusion_input_shape": [
+      120,
+      4,
+      4
+    ],
+    "_predict_local_landmark_uncertainty": true
+  },
+  "_encoder": {
+    "_image_backbone": null,
+    "_projection_layer": null,
+    "_heatmaps_head": null,
+    "training": false,
+    "_is_full_backward_hook": null,
+    "_input_img_sizes": [
+      96,
+      96
+    ],
+    "_multiv_fusion_nc_in": 120,
+    "_ftl_ratio": 0.5,
+    "_use_unscaled_as_canonical": false,
+    "_predict_visibility_at_encoder": true,
+    "_n_feature_elem_per_img": 960,
+    "_predict_heatmaps": true,
+    "_feed_skeleton_features": true,
+    "_feed_rest_landmarks": false,
+    "_n_skel_channels": 4
+  },
+  "_temporal": {
+    "training": false,
+    "_is_full_backward_hook": null,
+    "_nc_memory": 18,
+    "_temporal_ftl_ratio": 0.5,
+    "_input_shape": [
+      78,
+      4,
+      4
+    ]
+  },
+  "_skel_pose_regressor": {
+    "_left_wrist_sample_points": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.10000000149011612,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.10000000149011612,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.10000000149011612
+      ],
+      [
+        -0.0707106813788414,
+        -0.0707106813788414,
+        0.0
+      ],
+      [
+        -0.0707106813788414,
+        0.0,
+        -0.0707106813788414
+      ],
+      [
+        0.0,
+        -0.0707106813788414,
+        -0.0707106813788414
+      ]
+    ],
+    "training": false,
+    "_is_full_backward_hook": null,
+    "_wrist_xfs_svd": true,
+    "_shape_param_multiplier": [
+      0.23263967037200928,
+      254.05270385742188,
+      150.2708740234375,
+      108.40111541748047,
+      80.37425231933594,
+      76.99761962890625,
+      92.4109878540039,
+      79.3682861328125,
+      69.95740509033203,
+      58.78435134887695,
+      32.43494415283203,
+      33.57500457763672,
+      30.81423568725586,
+      36.144351959228516,
+      45.872684478759766,
+      26.271970748901367,
+      28.258281707763672,
+      30.468935012817383,
+      28.740859985351562,
+      21.72771644592285,
+      23.262372970581055,
+      24.251291275024414,
+      10.56432819366455,
+      14.009551048278809,
+      6.092598915100098,
+      12.530170440673828,
+      28.020320892333984,
+      9.302801132202148,
+      16.1524658203125,
+      17.4846248626709,
+      10.690409660339355,
+      9.78820514678955,
+      8.278046607971191,
+      7.645730972290039,
+      11.444676399230957,
+      5.742067813873291,
+      6.403432846069336,
+      10.482682228088379,
+      10.516640663146973,
+      11.455289840698242
+    ],
+    "_shape_param_offset": [
+      1.0778957605361938,
+      15.200150489807129,
+      -48.171958923339844,
+      9.255114555358887,
+      -1.4129899740219116,
+      -2.0770254135131836,
+      11.221216201782227,
+      6.480697154998779,
+      11.7474365234375,
+      0.1040402501821518,
+      -11.349181175231934,
+      -23.309886932373047,
+      5.947360038757324,
+      28.53631019592285,
+      6.367161273956299,
+      7.8963494300842285,
+      -0.5742077827453613,
+      -3.0418314933776855,
+      3.5904459953308105,
+      -6.505894660949707,
+      4.3946380615234375,
+      -0.8876047730445862,
+      10.472047805786133,
+      10.105088233947754,
+      -3.3664751052856445,
+      3.7624900341033936,
+      2.1016464233398438,
+      -3.2207624912261963,
+      -6.411828994750977,
+      1.8789809942245483,
+      -0.24482792615890503,
+      3.951671600341797,
+      2.9134011268615723,
+      1.2659460306167603,
+      2.229396343231201,
+      0.5556180477142334,
+      1.7912795543670654,
+      -1.5326937437057495,
+      2.2542407512664795,
+      -5.060466766357422
+    ],
+    "_output_index_ranges": {
+      "joint_angles": [
+        0,
+        20
+      ],
+      "wrist_xfs": [
+        20,
+        41
+      ],
+      "landmark_uncertainty_sigmas": [
+        41,
+        62
+      ]
+    },
+    "_input_shape": [
+      64,
+      4,
+      4
+    ],
+    "_force_cpu_svd": true
+  },
+  "_preds_pose_regressor": {
+    "_left_wrist_sample_points": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.10000000149011612,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.10000000149011612,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.10000000149011612
+      ],
+      [
+        -0.0707106813788414,
+        -0.0707106813788414,
+        0.0
+      ],
+      [
+        -0.0707106813788414,
+        0.0,
+        -0.0707106813788414
+      ],
+      [
+        0.0,
+        -0.0707106813788414,
+        -0.0707106813788414
+      ]
+    ],
+    "training": false,
+    "_is_full_backward_hook": null,
+    "_wrist_xfs_svd": true,
+    "_shape_param_multiplier": [
+      0.23263967037200928,
+      254.05270385742188,
+      150.2708740234375,
+      108.40111541748047,
+      80.37425231933594,
+      76.99761962890625,
+      92.4109878540039,
+      79.3682861328125,
+      69.95740509033203,
+      58.78435134887695,
+      32.43494415283203,
+      33.57500457763672,
+      30.81423568725586,
+      36.144351959228516,
+      45.872684478759766,
+      26.271970748901367,
+      28.258281707763672,
+      30.468935012817383,
+      28.740859985351562,
+      21.72771644592285,
+      23.262372970581055,
+      24.251291275024414,
+      10.56432819366455,
+      14.009551048278809,
+      6.092598915100098,
+      12.530170440673828,
+      28.020320892333984,
+      9.302801132202148,
+      16.1524658203125,
+      17.4846248626709,
+      10.690409660339355,
+      9.78820514678955,
+      8.278046607971191,
+      7.645730972290039,
+      11.444676399230957,
+      5.742067813873291,
+      6.403432846069336,
+      10.482682228088379,
+      10.516640663146973,
+      11.455289840698242
+    ],
+    "_shape_param_offset": [
+      1.0778957605361938,
+      15.200150489807129,
+      -48.171958923339844,
+      9.255114555358887,
+      -1.4129899740219116,
+      -2.0770254135131836,
+      11.221216201782227,
+      6.480697154998779,
+      11.7474365234375,
+      0.1040402501821518,
+      -11.349181175231934,
+      -23.309886932373047,
+      5.947360038757324,
+      28.53631019592285,
+      6.367161273956299,
+      7.8963494300842285,
+      -0.5742077827453613,
+      -3.0418314933776855,
+      3.5904459953308105,
+      -6.505894660949707,
+      4.3946380615234375,
+      -0.8876047730445862,
+      10.472047805786133,
+      10.105088233947754,
+      -3.3664751052856445,
+      3.7624900341033936,
+      2.1016464233398438,
+      -3.2207624912261963,
+      -6.411828994750977,
+      1.8789809942245483,
+      -0.24482792615890503,
+      3.951671600341797,
+      2.9134011268615723,
+      1.2659460306167603,
+      2.229396343231201,
+      0.5556180477142334,
+      1.7912795543670654,
+      -1.5326937437057495,
+      2.2542407512664795,
+      -5.060466766357422
+    ],
+    "_output_index_ranges": {
+      "skel_scales": [
+        0,
+        1
+      ],
+      "joint_angles": [
+        1,
+        21
+      ],
+      "wrist_xfs": [
+        21,
+        42
+      ],
+      "landmark_uncertainty_sigmas": [
+        42,
+        63
+      ]
+    },
+    "_input_shape": [
+      60,
+      4,
+      4
+    ],
+    "_force_cpu_svd": true
+  },
+  "skeleton_profile_sha256": "10282731f703669daa10040612a9d48a8cb133c17050da0c1aabbc41dc287ea8",
+  "special_vertices": {
+    "correspondenceVertices": [
+      32,
+      515,
+      425,
+      598,
+      658,
+      688,
+      281,
+      79,
+      190,
+      128,
+      195,
+      375,
+      115,
+      467,
+      182,
+      542,
+      319,
+      204,
+      743,
+      628
+    ],
+    "fingerPadIndices": [
+      646,
+      592,
+      508,
+      422,
+      686
+    ],
+    "fingerTipIndices": [
+      662,
+      601,
+      517,
+      430,
+      695
+    ],
+    "fingernailPoints": [
+      663,
+      602,
+      518,
+      432,
+      696
+    ],
+    "knuckleIndices": [
+      301,
+      87,
+      83,
+      294,
+      144
+    ],
+    "palmCenterIndex": 260,
+    "palmColliderBaseIndices": [
+      [
+        0,
+        0
+      ],
+      [
+        39,
+        264
+      ],
+      [
+        33,
+        264
+      ],
+      [
+        35,
+        706
+      ],
+      [
+        36,
+        712
+      ]
+    ],
+    "palmKnucklePoints": [
+      207,
+      210,
+      220,
+      221,
+      223
+    ]
+  },
+  "joint_names": [
+    "THUMB_CMC_FE",
+    "THUMB_CMC_AA",
+    "THUMB_MCP_FE",
+    "THUMB_IP_FE",
+    "INDEX_MCP_AA",
+    "INDEX_MCP_FE",
+    "INDEX_PIP_FE",
+    "INDEX_DIP_FE",
+    "MIDDLE_MCP_AA",
+    "MIDDLE_MCP_FE",
+    "MIDDLE_PIP_FE",
+    "MIDDLE_DIP_FE",
+    "RING_MCP_AA",
+    "RING_MCP_FE",
+    "RING_PIP_FE",
+    "RING_DIP_FE",
+    "PINKY_MCP_AA",
+    "PINKY_MCP_FE",
+    "PINKY_PIP_FE",
+    "PINKY_DIP_FE",
+    "WRIST_AA",
+    "WRIST_FE"
+  ],
+  "skeleton_units": "Source millimeters converted once to meters for original DPE spatial input and output; axes and angles unchanged.",
+  "formula_source": "Public UmeTrack commit e263ec0844abf73457468a050a75853444d33d69, lib/models/model_utils.py, regressor.py and lib/common/hand_skinning.py. FTL and outer decoding behavior not yet checked against native Quest runtime.",
+  "arrays": {
+    "c0_weight": {
+      "shape": [
+        21,
+        960
+      ],
+      "dtype": "float32",
+      "sha256": "204e0d00edd683d24431f95a91b460f1b0ee3070b5cb59ce21e5c59f07c67e88"
+    },
+    "c0_bias": {
+      "shape": [
+        21
+      ],
+      "dtype": "float32",
+      "sha256": "ce9dde1ec1c3b44adb37f3abdec7cc629f279bb23ff0516035d80db5c7e861c8"
+    },
+    "c1_weight": {
+      "shape": [
+        64,
+        132
+      ],
+      "dtype": "float32",
+      "sha256": "902063e261636df49e43db04f57d90add200108e16f0b49c3a7581b7fcc139d6"
+    },
+    "c1_bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "sha256": "ba2e1545f7d17152fa6714d4f4450537b42f075ec6ccc67ca852aa991dd6cf9a"
+    },
+    "c2": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32",
+      "sha256": "4ffde362a94844c9ae165d69a45a1ce06c0d22c5b0b4d168100007ffadafb73d"
+    },
+    "c3": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32",
+      "sha256": "8559d3a0f7bb8a579ee2ea4d8932e9138e0a34b515dd9333b941c8fe8be253c5"
+    },
+    "c4": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32",
+      "sha256": "7fd5c69b8db25aaefdc79656a27a07121aedb67fb9cb045f7f9237986e639687"
+    },
+    "c5": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32",
+      "sha256": "2bf1b9d51d8023f75a515acd44306426e7ac9148ad3803b5dc3dd6a6ea403ba5"
+    },
+    "c6_weight": {
+      "shape": [
+        78,
+        78,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "e86700cade0eabbaebe7ce148ce87c58e9c4100b26197935cf083a3a176d8141"
+    },
+    "c6_bias": {
+      "shape": [
+        78
+      ],
+      "dtype": "float32",
+      "sha256": "d4fe27ac282ed4151884be813651fc8e5352e37d9c19171778e6571ef446f355"
+    },
+    "c7_weight": {
+      "shape": [
+        78,
+        78,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "75ccbcfce1d4264232aab199ef334a19bd5d4e8113a1860fec70e2df4d4e7970"
+    },
+    "c7_bias": {
+      "shape": [
+        78
+      ],
+      "dtype": "float32",
+      "sha256": "16947029bb518af2c16790e1f372e8808dbceb577597e12c32cae0cdfab7f126"
+    },
+    "c8_weight": {
+      "shape": [
+        78,
+        78,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "2e7514207579a54f7406e46dd7a1b0c5c46c847aa5b03c54ffb79bcd8e28e107"
+    },
+    "c8_bias": {
+      "shape": [
+        78
+      ],
+      "dtype": "float32",
+      "sha256": "aae5b81af67b39b5c3c8931c3f06c1db722a0a07d5fa5fe31f55a83546e74848"
+    },
+    "c9_weight": {
+      "shape": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "e07ed21c857132d74abc457e129a830ac593081ec9903072f6efb89b6dc0ae5d"
+    },
+    "c9_bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "sha256": "3f359be9d47a9736bdf361fd49041123f9e7477e737e1e642266530a5346221a"
+    },
+    "c10_weight": {
+      "shape": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "c5be47b2807c9cc93620a0037802cd2e06b5c9ccab39787cbafb5c3c366566f6"
+    },
+    "c10_bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "sha256": "6d61751f361b34522124052f3f2d5b8c4ba2be6c2d06192226615ad34e552a7f"
+    },
+    "c11_weight": {
+      "shape": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "c245cc0d3af8e69676bacd53b2de6877673085eec3ff59e19f8129a643c47936"
+    },
+    "c11_bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "sha256": "26ba1b4db4ff71bc8f26db96ccb8425124c0fbedc23b865ec93b343570402569"
+    },
+    "c12_weight": {
+      "shape": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "f756cdb1700057b8e97a5c214b951635a69eb917bfad5f4de7f0c5e9089905ce"
+    },
+    "c12_bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "sha256": "c19e3df296841db0747a7f795333e70de8e3acbbbecac0a8502df2838ee14d5b"
+    },
+    "c13_weight": {
+      "shape": [
+        62,
+        64,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "3232c876ec1708cdc3c59cf0036ad6ea29d81fbbe309f171f71709f24da82ae6"
+    },
+    "c13_bias": {
+      "shape": [
+        62
+      ],
+      "dtype": "float32",
+      "sha256": "1944e028c1df06157c9265cf9728f24d141ff21af85af56a16462c74eec37112"
+    },
+    "c14_weight": {
+      "shape": [
+        60,
+        60,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "d5af5f6a0da2ef58aeb769853faf362ed650f0ce0112a0b172cf1a1180f7993f"
+    },
+    "c14_bias": {
+      "shape": [
+        60
+      ],
+      "dtype": "float32",
+      "sha256": "aea73639555cc3778119ac74194b11717067722d704e0a280a06d31ae777d631"
+    },
+    "c15_weight": {
+      "shape": [
+        1,
+        60,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "9b176f8859f2812082cd3372a84c33c0420c98f852fd183d3a2e01b4eeb7115d"
+    },
+    "c15_bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "1926025346c632e155155c233ebaa1e4f9a9ed276b4479f293a32435e7b2b79a"
+    },
+    "c16_weight": {
+      "shape": [
+        128,
+        60,
+        4,
+        4
+      ],
+      "dtype": "float32",
+      "sha256": "2b826fac9e0ee1270c5f7798daa38d5eb48809371b9e2b0bb1d7949e9486dd7d"
+    },
+    "c16_bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32",
+      "sha256": "3388ed3a3752f6d6add5ae06bd3e4c2abffdeef841e5a697ac29544c9f587e71"
+    },
+    "c17_weight": {
+      "shape": [
+        60,
+        60,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "52f329f17664e50d9c29b38202d974c7e7bb3779d99e15550fc88b45d52ffe2f"
+    },
+    "c17_bias": {
+      "shape": [
+        60
+      ],
+      "dtype": "float32",
+      "sha256": "979452aba97fa2adaa93a81025ca94693c02c77def82dd95fc1ec34dcd8fd7cc"
+    },
+    "c18_weight": {
+      "shape": [
+        60,
+        60,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "4b92e4cce49754e43fb2639b21f1aaa90e11ddbc4bfb1875ec35dbc3556a8ca7"
+    },
+    "c18_bias": {
+      "shape": [
+        60
+      ],
+      "dtype": "float32",
+      "sha256": "9462bf74006def730dcd633c08c2127ac837fd221f1def579c447643febe3ae6"
+    },
+    "c19_weight": {
+      "shape": [
+        60,
+        60,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "c26e9c50add176fa8f218b0b4e143c38273d6c2f18c0896067139de739c0d84f"
+    },
+    "c19_bias": {
+      "shape": [
+        60
+      ],
+      "dtype": "float32",
+      "sha256": "08ed525df54abb733a29a932f1bfe60a9224e04bbabb222bed407982eeda8926"
+    },
+    "c20_weight": {
+      "shape": [
+        60,
+        60,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "ab41918db15f184383a1b33bccdb02c7c577b88118df27e361a0fb9b6b4d7c9f"
+    },
+    "c20_bias": {
+      "shape": [
+        60
+      ],
+      "dtype": "float32",
+      "sha256": "a738844018c078ae29072f000eea3752b402c243ed1fd98f26e393afbfb951d2"
+    },
+    "c21_weight": {
+      "shape": [
+        63,
+        60,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "ab25d4c8710da2151c3f9babc1d216d8ea2c2b3be6d68f711220ed8b8d1d32a4"
+    },
+    "c21_bias": {
+      "shape": [
+        63
+      ],
+      "dtype": "float32",
+      "sha256": "cc37a0d1882f01564be42b2053d3778601e15d9b6626d1176ad0540f370a3a1c"
+    },
+    "_left_wrist_sample_points": {
+      "shape": [
+        7,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "fb9cebc0564dd2d444ecd9e5ae51bb250ae8b9cdc522956b85c0580fcb43c735"
+    },
+    "_shape_param_multiplier": {
+      "shape": [
+        40
+      ],
+      "dtype": "float32",
+      "sha256": "a52837cd5f27d24d8118779ba2e2ef31456976c4bd45ee6bf9feb248ecdd5609"
+    },
+    "_shape_param_offset": {
+      "shape": [
+        40
+      ],
+      "dtype": "float32",
+      "sha256": "af11f772ba44b75eb29c088b87685ae56b92c639f5c749e2765db5aa6687f776"
+    },
+    "joint_rotation_axes": {
+      "shape": [
+        22,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "cfdc947cb814bf567a352ac68036ab6c22568fe8141701b57ea995d6b000ea6a"
+    },
+    "joint_rest_positions": {
+      "shape": [
+        22,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "87f0e08b34e9deba935de4faf6209bedddf5af53ff97a44e126a5226d2580635"
+    },
+    "joint_limits": {
+      "shape": [
+        22,
+        2
+      ],
+      "dtype": "float32",
+      "sha256": "9a358783b3d9c17f6d6d7d94008d59c62b080498391c9562ebb85519192b31f7"
+    },
+    "mesh_rest_positions": {
+      "shape": [
+        788,
+        3
+      ],
+      "dtype": "float32",
+      "sha256": "7d7d7926ed9f172a0cd0fbef98cdf7e4f3d63fd752f91745ce385e7728f33a98"
+    },
+    "mesh_skin_weights": {
+      "shape": [
+        788,
+        17
+      ],
+      "dtype": "float32",
+      "sha256": "7165e5d23fc88f90dc2fa352854d4905b8b22efe48a431fb86b5166a0e119786"
+    }
+  },
+  "native_geometry_static_recovery": {
+    "evidence": "native-geometry-recovery.json",
+    "canonical_focal_original_binary_verified": true,
+    "ftl_affine_direction_original_binary_verified": true,
+    "private_nimble_numeric_equivalence": false
+  }
+}

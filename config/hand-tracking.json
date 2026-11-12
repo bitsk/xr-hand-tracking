@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "backend": "quest-dsp",
+  "assets": "/var/lib/xr-hand-tracking/quest",
+  "calibration": "/var/lib/xr-device-io/calibration.xml",
+  "runtime_root": "/usr/lib/xr/vendor/a081/qcom",
+  "rpc_daemon": "/usr/bin/xr-hexagonrpcd",
+  "dsp_client": "/usr/lib/aarch64-linux-gnu/xr/hand-tracking/libxr-quest-hand-client.so",
+  "camera_socket": "/run/xr-hand-tracking/camera/input.sock",
+  "state_socket": "/run/xr-hand-tracking/state.sock",
+  "log_directory": "/var/log/xr-hand-tracking",
+  "detector_period": 1.0,
+  "threads": 2
+}

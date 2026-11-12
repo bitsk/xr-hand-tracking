@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+"""Import local original model assets with digests; never downloads firmware."""
+import argparse,hashlib,json,shutil
+from pathlib import Path
+p=argparse.ArgumentParser(description=__doc__);p.add_argument('--from-bundle',type=Path,required=True);p.add_argument('--destination',type=Path,default=Path('/var/lib/xr-hand-tracking/quest'));a=p.parse_args()
+if a.destination.exists():raise FileExistsError('Choose a new destination; never replace an existing asset set')
+names=['backbone-hvx.qhf','fusion-hvx.qhf','detector-hvx.qhf','original-decoder-weights.npz','contract.json']
+m=json.loads((a.from_bundle/'manifest.json').read_text());files={}
+for key,expected in {
+ 'original_weight_sha256':'3eb61de14e6f68fceb59be0b5b1ffda8f17f5a70659794d95cd80b3154a1c3d1',
+ 'fusion_original_weight_sha256':'3ad6dae393d39df548521031fbb58c9ffd7f5fee8c58027f8db877edc9531d92',
+ 'detector_original_weight_sha256':'a41366dfc3c9832982a6d7143f023361ca422913e682bac8eb59018797d22b51'
+}.items():
+ if m.get(key)!=expected:raise ValueError('Unexpected original model: '+key)
+for n in names+[str(x.relative_to(a.from_bundle)) for x in (a.from_bundle/'dsp').iterdir() if x.is_file()]:
+ p=a.from_bundle/n;r=m['files'][n]
+ if p.stat().st_size!=r['bytes'] or hashlib.sha256(p.read_bytes()).hexdigest()!=r['sha256']:raise ValueError('Input asset mismatch: '+n)
+ files[n]=r
+# Validate the complete source before creating the destination.
+a.destination.mkdir(parents=True,mode=0o700)
+for n in files:
+ target=a.destination/n;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(a.from_bundle/n,target)
+(a.destination/'assets.lock.json').write_text(json.dumps({'schema':1,'model':'DPEV30MG + DETV62','source_manifest_sha256':hashlib.sha256((a.from_bundle/'manifest.json').read_bytes()).hexdigest(),'files':files},indent=2)+'\n')
+print(json.dumps({'imported':len(files),'destination':str(a.destination),'original_weight_bytes_modified':False}))

@@ -1,0 +1,5 @@
+The Quest host decoder adapts FTL, SVD wrist recovery and linear blend
+skinning from Meta UmeTrack, commit e263ec0844abf73457468a050a75853444d33d69.
+Copyright (c) Meta Platforms, Inc. and affiliates. CC BY-NC 4.0.
+The original neural weights and proprietary DSP libraries are external assets.
+A successful hardware run does not grant redistribution rights to those assets.

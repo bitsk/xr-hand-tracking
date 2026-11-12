@@ -1,0 +1,21 @@
+Source: xr-hand-tracking
+Section: misc
+Priority: optional
+Maintainer: bits <bigbits@hackx.cc>
+Build-Depends: debhelper-compat (= 13), cmake, ninja-build, g++
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+
+Package: xr-hand-tracking
+Architecture: all
+Depends: ${misc:Depends}, python3, python3-numpy
+Suggests: xr-hand-backend-quest-dsp
+Description: XR hand poses gestures and versioned local IPC
+ Consumes an existing device owner's shared frames. Installation neither
+ starts an XR session nor acquires cameras.
+
+Package: libxr-hand-dev
+Architecture: all
+Depends: ${misc:Depends}
+Description: XR hand state ABI headers and CMake interface
+ Provides the sole maintained public IPC contract for hand consumers.

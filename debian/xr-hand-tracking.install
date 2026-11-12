@@ -1,0 +1,4 @@
+usr/bin/*
+usr/share/xr-hand-tracking/python
+etc/xr/hand-tracking.json
+usr/lib/systemd/system/*

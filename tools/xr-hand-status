@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+import argparse,json,socket,sys,time
+sys.path.insert(0,'/usr/share/xr-hand-tracking/python')
+from xr_hand.protocol import decode,SIZE
+p=argparse.ArgumentParser();p.add_argument('--socket',default='/run/xr-hand-tracking/state.sock');p.add_argument('--samples',type=int,default=1);a=p.parse_args()
+with socket.socket(socket.AF_UNIX,socket.SOCK_SEQPACKET) as s:
+ s.settimeout(5);s.connect(a.socket)
+ for _ in range(a.samples):
+  d=decode(s.recv(SIZE+1));d['received_boottime_ns']=time.clock_gettime_ns(time.CLOCK_BOOTTIME);d['expired']=d['received_boottime_ns']>=d['valid_until_boottime_ns'];print(json.dumps(d),flush=True)

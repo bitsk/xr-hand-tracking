@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
+project(xr_hand_backend_quest_dsp VERSION 0.1.0 LANGUAGES CXX)
+include(GNUInstallDirs)
+add_library(xr-quest-hand-client SHARED dsp_client.cpp)
+target_compile_features(xr-quest-hand-client PRIVATE cxx_std_17)
+target_compile_options(xr-quest-hand-client PRIVATE -O2 -Wall -Wextra)
+install(TARGETS xr-quest-hand-client LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/xr/hand-tracking)
+install(FILES camera.py decoder.py pipeline_client.py worker.py contract.json DESTINATION ${CMAKE_INSTALL_DATADIR}/xr-hand-tracking/backends/quest)
