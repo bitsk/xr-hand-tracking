@@ -51,7 +51,9 @@ def main():
         while not stopped and dsp.poll() is None and time.monotonic()<deadline:
             if stage.exists() and ready.is_set():break
             time.sleep(.05)
-        else:raise RuntimeError('DSP did not become ready; see the system journal')
+        else:
+            if stopped:return
+            raise RuntimeError('DSP did not become ready; see the system journal')
         worker_path=Path(__file__).resolve().parents[2]/'backends/quest/worker.py'
         command=[sys.executable,str(worker_path),'--assets',str(assets),'--camera-socket',c['camera_socket'],'--state-socket',c['state_socket'],'--calibration',c['calibration'],'--output',str(logdir),'--frames','0','--seconds','0','--save-every','0','--detector-period',str(c.get('detector_period',1.))]
         if c.get('exercise_inactive',False):command.append('--exercise-inactive')
