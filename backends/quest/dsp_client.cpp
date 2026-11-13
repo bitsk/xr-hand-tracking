@@ -112,9 +112,27 @@ struct Module {
     std::vector<uint32_t> graphs;
     explicit Module(int value):fd(value) {}
     void dump_log() {
+#ifdef XR_QUEST_DIAGNOSTIC_INNER_LOG
+        // Only with the hash-verified diagnostic COPY of the DSP library.
+        // RPC44 encodes the inner graph ID in capacity; the production library
+        // has a different GetLog contract. Execute has returned synchronously,
+        // so no graph execution or destruction races these draining reads.
+        unsigned found=0;
+        for (uint32_t id=1;id<=128;++id) {
+            unsigned capacity=id*128;
+            Buffers in{words({44,capacity})},out{Bytes(capacity)};
+            int rc=invoke(fd,handle,31,in,out);
+            if (!rc) {
+                ++found;
+                std::printf("stage=legacy_log gid=%u rc=0 capacity=%u text=%.*s\n",id,capacity,int(capacity-1),out[0].data());
+            }
+        }
+        std::printf("stage=legacy_logs_complete valid_graphs=%u scope=owned_private_PD_diagnostic_library_only\n",found);
+#else
         Buffers in{words({44, 16384})}, out{Bytes(16384)};
         int rc = invoke(fd, handle, 31, in, out);
         std::printf("stage=nn_log rc=%d text=%.*s\n", rc, 16383, out[0].data());
+#endif
     }
     ~Module() {
         for (auto it=graphs.rbegin();it!=graphs.rend();++it) {
@@ -364,6 +382,9 @@ static void serve(Graph &backbone,Graph &fusion,const std::string &path,Detector
         }
     }
     std::printf("stage=pipeline_complete requests=%llu cpu_fallback=0\n",(unsigned long long)requests);
+#ifdef XR_QUEST_DIAGNOSTIC_INNER_LOG
+    backbone.m.dump_log();
+#endif
 }
 extern "C" int a081_qvr_client_main() {
     std::setvbuf(stdout,nullptr,_IOLBF,0);std::setvbuf(stderr,nullptr,_IOLBF,0);
