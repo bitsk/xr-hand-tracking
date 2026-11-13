@@ -111,6 +111,28 @@ struct Module {
     int fd; uint32_t handle = 0, graph = 0; bool opened = false, initialized = false, started = false;
     std::vector<uint32_t> graphs;
     explicit Module(int value):fd(value) {}
+    void save_failed_input(uint32_t id, const Bytes &data) {
+#ifdef XR_QUEST_DIAGNOSTIC_INNER_LOG
+        const char *directory=std::getenv("QUEST_PIPELINE_FAILURE_DIRECTORY");
+        if (!directory) return;
+        int dir=::open(directory,O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC);
+        if(dir<0){std::fprintf(stderr,"stage=failure_input_directory errno=%d\n",errno);return;}
+        char name[96];std::snprintf(name,sizeof(name),"pid-%u-graph-%u.input.u8",unsigned(getpid()),id);
+        int output=openat(dir,name,O_WRONLY|O_CREAT|O_EXCL|O_NOFOLLOW|O_CLOEXEC,0600);close(dir);
+        if(output<0){std::fprintf(stderr,"stage=failure_input_open errno=%d\n",errno);return;}
+        size_t written=0;
+        while(written<data.size()) {
+            ssize_t n=write(output,data.data()+written,data.size()-written);
+            if(n<0&&errno==EINTR)continue;
+            if(n<=0)break;
+            written+=size_t(n);
+        }
+        close(output);
+        std::fprintf(stderr,"stage=failure_input_saved file=%s bytes=%zu expected=%zu\n",name,written,data.size());
+#else
+        (void)id;(void)data;
+#endif
+    }
     void dump_log() {
 #ifdef XR_QUEST_DIAGNOSTIC_INNER_LOG
         // Only with the hash-verified diagnostic COPY of the DSP library.
@@ -260,6 +282,7 @@ struct Graph {
         e.rpc_ms=now_ms()-raw;e.end_ns=monotonic_ns();
         if(rc||at(out[0],0)) {
             std::fprintf(stderr,"stage=graph_execute_error graph=%u transport=%d code=%u node=%u\n",gid,rc,at(out[0],0),at(out[0],4));
+            m.save_failed_input(gid,data);
             m.dump_log();throw std::runtime_error("graph execution failed");
         }
         for(size_t j=0;j<4;++j) if(at(out[1],j*4)!=output_shape[j]) throw std::runtime_error("output shape");
@@ -290,6 +313,7 @@ struct DetectorGraph {
         e.rpc_ms=now_ms()-raw;e.end_ns=monotonic_ns();
         if(rc||at(out[0],0)) {
             std::fprintf(stderr,"stage=detector_execute_error graph=%u transport=%d code=%u node=%u\n",gid,rc,at(out[0],0),at(out[0],4));
+            m.save_failed_input(gid,data);
             m.dump_log();throw std::runtime_error("detector graph execution failed");
         }
         const uint32_t ranks[]={3,2,2},sizes[]={64,32,32};
