@@ -10,5 +10,6 @@
   "state_socket": "/run/xr-hand-tracking/state.sock",
   "log_directory": "/var/log/xr-hand-tracking",
   "detector_period": 1.0,
-  "threads": 2
+  "threads": 2,
+  "vtcm_bytes": 16384
 }

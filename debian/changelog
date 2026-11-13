@@ -1,3 +1,9 @@
+xr-hand-tracking (0.1.5) unstable; urgency=medium
+
+  * Budget outer-graph VTCM separately from the V66 delegated operator workspace.
+
+ -- bits <bigbits@hackx.cc>  Fri, 13 Nov 2026 11:20:30 +0800
+
 xr-hand-tracking (0.1.4) unstable; urgency=medium
 
   * Recreate one fully released private DSP session after execution error 1042.
