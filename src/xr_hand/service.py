@@ -51,7 +51,7 @@ def run_backend(c,assets,run,logdir,stopped):
     stage=run/'stages.sock';stage.unlink(missing_ok=True)
     for path in [Path(c['camera_socket']),Path(c['state_socket'])]:
         if path.exists():raise FileExistsError('Endpoint already owned: '+str(path))
-    env=dict(os.environ,QUEST_HAND_BUNDLE=str(assets),QUEST_HAND_RESULT=str(logdir),QUEST_PIPELINE_RESULT=str(logdir),XR_FASTRPC_UNSIGNED_PD='1',QUEST_PIPELINE_SOCKET=str(stage),QUEST_PIPELINE_IDLE_MS='60000',QUEST_PIPELINE_DETECTOR='1',QUEST_PIPELINE_THREADS=str(c.get('threads',2)),QUEST_PIPELINE_VTCM_BYTES=str(c.get('vtcm_bytes',16384)),QUEST_PIPELINE_DEBUG_LEVEL='1',OPENBLAS_NUM_THREADS='1',OMP_NUM_THREADS='1')
+    env=dict(os.environ,QUEST_HAND_BUNDLE=str(assets),QUEST_HAND_RESULT=str(logdir),QUEST_PIPELINE_RESULT=str(logdir),XR_FASTRPC_UNSIGNED_PD='1',QUEST_PIPELINE_SOCKET=str(stage),QUEST_PIPELINE_IDLE_MS='60000',QUEST_PIPELINE_DETECTOR='1',QUEST_PIPELINE_THREADS=str(c.get('threads',1)),QUEST_PIPELINE_VTCM_BYTES=str(c.get('vtcm_bytes',16384)),QUEST_PIPELINE_DEBUG_LEVEL='1',OPENBLAS_NUM_THREADS='1',OMP_NUM_THREADS='1')
     env['PYTHONPATH']='/usr/share/xr-hand-tracking/python'+os.pathsep+str(Path(__file__).resolve().parents[2]/'backends/quest')
     dsp=None;worker=None;log_thread=None;ready=threading.Event()
     fault1042=[];clean_exit=threading.Event();module_closed=threading.Event()
