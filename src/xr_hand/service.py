@@ -48,6 +48,11 @@ def run_backend(c,assets,run,logdir,stopped):
     if runtime.exists():shutil.rmtree(runtime)
     shutil.copytree(c['runtime_root'],runtime,symlinks=False)
     for file in (assets/'dsp').iterdir():shutil.copy2(file,runtime/'dsp/cdsp'/file.name)
+    backend=Path(__file__).resolve().parents[2]/'backends/quest'
+    sys.path.insert(0,str(backend))
+    from vtcm_policy import prepare_runtime_library
+    policy=prepare_runtime_library(assets/'dsp/libhexagon_skel.so',runtime/'dsp/cdsp/libhexagon_skel.so')
+    print(json.dumps(policy),flush=True)
     stage=run/'stages.sock';stage.unlink(missing_ok=True)
     for path in [Path(c['camera_socket']),Path(c['state_socket'])]:
         if path.exists():raise FileExistsError('Endpoint already owned: '+str(path))

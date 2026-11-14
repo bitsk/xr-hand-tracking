@@ -2,13 +2,13 @@ Source: xr-hand-backend-quest-dsp
 Section: non-free/misc
 Priority: optional
 Maintainer: bits <bigbits@hackx.cc>
-Build-Depends: debhelper-compat (= 13), cmake, ninja-build, g++
+Build-Depends: debhelper-compat (= 13), cmake, ninja-build, g++, clang-21:native, lld-21:native, llvm-21:native
 Standards-Version: 4.7.0
 Rules-Requires-Root: no
 
 Package: xr-hand-backend-quest-dsp
 Architecture: arm64
-Depends: ${shlibs:Depends}, ${misc:Depends}, xr-hand-tracking (>= 0.1.0), xr-hexagonrpc-daemon (>= 0.5.1)
+Depends: ${shlibs:Depends}, ${misc:Depends}, xr-hand-tracking (>= 0.1.9), xr-hexagonrpc-daemon (>= 0.5.1)
 Description: Optional original-weight Quest Hexagon hand backend
  Contains the DSP client and host decoder, including CC BY-NC 4.0 UmeTrack
  geometry adaptations. Proprietary model weights, DSP binaries and private

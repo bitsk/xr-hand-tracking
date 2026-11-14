@@ -1,3 +1,9 @@
+xr-hand-backend-quest-dsp (0.1.4) unstable; urgency=medium
+
+  * Build a fixed inner workspace policy without transient free-space sizing.
+
+ -- bits <bigbits@hackx.cc>  Sat, 14 Nov 2026 15:34:09 +0800
+
 xr-hand-backend-quest-dsp (0.1.2) unstable; urgency=medium
 
   * Retain exact failed tensors in explicitly selected private diagnostics.

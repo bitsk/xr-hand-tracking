@@ -1,3 +1,9 @@
+xr-hand-tracking (0.1.9) unstable; urgency=medium
+
+  * Apply the fixed inner VTCM policy to a private runtime copy.
+
+ -- bits <bigbits@hackx.cc>  Sat, 14 Nov 2026 15:34:09 +0800
+
 xr-hand-tracking (0.1.6) unstable; urgency=medium
 
   * Decouple palm aiming from finger flexion and stabilize pinch onset without freezing drag.
