@@ -1,3 +1,9 @@
+xr-hand-tracking (0.1.8) unstable; urgency=medium
+
+  * Document bounded DSP execution retry with unchanged exposure validity.
+
+ -- bits <bigbits@hackx.cc>  Sat, 14 Nov 2026 14:57:11 +0800
+
 xr-hand-tracking (0.1.7) unstable; urgency=medium
 
   * Serialize outer graph execution to avoid competing delegated V66 VTCM leases.

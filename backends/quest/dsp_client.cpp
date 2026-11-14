@@ -261,6 +261,24 @@ struct Execution {
     float min=0,max=0;
     Bytes data;
 };
+// The stateless DSP subgraphs may fail a synchronous execution while another
+// graph owns the V66 workspace. Retry only the observed 1042 status, never a
+// transport failure. Recopy the exact input and discard ALL partial outputs.
+// Temporal hand memory is advanced by the host only after a successful reply;
+// the normal exposure deadline still rejects a late result downstream.
+static int execute_with_retry(Module &m,uint32_t gid,Buffers &in,Buffers &out,const Bytes &data) {
+    const unsigned delay_us[]={2000,8000,20000};
+    const uint64_t started=monotonic_ns();
+    for(unsigned attempt=0;;++attempt){
+        std::copy(data.begin(),data.end(),in[2].begin());
+        for(auto &b:out)std::fill(b.begin(),b.end(),0xa5);
+        int rc=invoke(m.fd,m.handle,31,in,out);
+        if(rc||at(out[0],0)!=1042||attempt==3||monotonic_ns()-started>=100000000ULL)return rc;
+        std::fprintf(stderr,"stage=execute_retry graph=%u code=1042 node=%u attempt=%u delay_us=%u\n",gid,at(out[0],4),attempt+1,delay_us[attempt]);
+        timespec delay{0,long(delay_us[attempt])*1000};
+        while(nanosleep(&delay,&delay)&&errno==EINTR){}
+    }
+}
 struct Graph {
     Module &m; uint32_t gid; std::array<uint32_t,4> output_shape;
     uint32_t input_bytes,output_bytes;
@@ -278,7 +296,7 @@ struct Graph {
         std::copy(data.begin(),data.end(),in[2].begin());
         for(auto &b:out) std::fill(b.begin(),b.end(),0xa5);
         Execution e;e.start_ns=monotonic_ns();double raw=now_ms();
-        int rc=invoke(m.fd,m.handle,31,in,out);
+        int rc=execute_with_retry(m,gid,in,out,data);
         e.rpc_ms=now_ms()-raw;e.end_ns=monotonic_ns();
         if(rc||at(out[0],0)) {
             std::fprintf(stderr,"stage=graph_execute_error graph=%u transport=%d code=%u node=%u\n",gid,rc,at(out[0],0),at(out[0],4));
@@ -309,7 +327,7 @@ struct DetectorGraph {
         std::copy(data.begin(),data.end(),in[2].begin());
         for(auto &b:out)std::fill(b.begin(),b.end(),0xa5);
         Execution e;e.start_ns=monotonic_ns();double raw=now_ms();
-        int rc=invoke(m.fd,m.handle,31,in,out);
+        int rc=execute_with_retry(m,gid,in,out,data);
         e.rpc_ms=now_ms()-raw;e.end_ns=monotonic_ns();
         if(rc||at(out[0],0)) {
             std::fprintf(stderr,"stage=detector_execute_error graph=%u transport=%d code=%u node=%u\n",gid,rc,at(out[0],0),at(out[0],4));
