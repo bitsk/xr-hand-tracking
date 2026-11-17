@@ -9,8 +9,8 @@ Rules-Requires-Root: no
 Package: xr-hand-tracking
 Architecture: all
 Depends: ${misc:Depends}, python3, python3-numpy
-Suggests: xr-hand-backend-quest-dsp (>= 0.1.4)
-Breaks: xr-hand-backend-quest-dsp (<< 0.1.4)
+Suggests: xr-hand-backend-quest-dsp (>= 0.1.5)
+Breaks: xr-hand-backend-quest-dsp (<< 0.1.5)
 Description: XR hand poses gestures and versioned local IPC
  Consumes an existing device owner's shared frames. Installation neither
  starts an XR session nor acquires cameras.

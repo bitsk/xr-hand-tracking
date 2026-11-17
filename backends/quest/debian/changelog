@@ -1,3 +1,10 @@
+xr-hand-backend-quest-dsp (0.1.5) unstable; urgency=medium
+
+  * Consume real native historical HMD samples on either side of the camera
+    query without empirical age, clock-bracket or quaternion-norm cutoffs.
+
+ -- bits <bigbits@hackx.cc>  Wed, 18 Nov 2026 01:02:47 +0800
+
 xr-hand-backend-quest-dsp (0.1.4) unstable; urgency=medium
 
   * Build a fixed inner workspace policy without transient free-space sizing.

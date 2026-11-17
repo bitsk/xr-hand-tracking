@@ -35,8 +35,10 @@ def rodrigues(v):
 
 
 def quaternion_transform(position,xyzw):
+    position=np.asarray(position,float)
+    if position.shape!=(3,) or not np.isfinite(position).all():raise ValueError('Invalid measured head position')
     q=np.asarray(xyzw,float);n=q@q
-    if not np.isfinite(q).all() or abs(n-1)>.01:raise ValueError('Invalid measured head quaternion')
+    if not np.isfinite(q).all() or not math.isfinite(n) or n<=0:raise ValueError('Invalid measured head quaternion')
     x,y,z,w=q/np.sqrt(n)
     r=np.array([[1-2*(y*y+z*z),2*(x*y-z*w),2*(x*z+y*w)], [2*(x*y+z*w),1-2*(x*x+z*z),2*(y*z-x*w)], [2*(x*z-y*w),2*(y*z+x*w),1-2*(x*x+y*y)]])
     t=np.eye(4);t[:3,:3]=r;t[:3,3]=position;return t
@@ -164,8 +166,10 @@ class FrameReceiver:
                     raise ValueError('Fixed hand input requires explicit controls and no exposure schedule')
             elif valid&15!=15 or valid&16 or phase!=2:
                 raise ValueError('Hand input needs the scheduled long-exposure phase')
-            if not head_ns or not 0<exposure<1_000_000_000 or min(sof0,sof1)<=exposure+19335 or abs(sof0-sof1)>1_000_000 or bracket>=5000:raise ValueError('Unmatched camera timing')
-            if start1!=sof1-exposure-19335 or not 0<=start1-head_ns<20_000_000:raise ValueError('Inconsistent exposure/pose timestamps')
+            if not head_ns or not 0<exposure<1_000_000_000 or min(sof0,sof1)<=exposure+19335 or abs(sof0-sof1)>1_000_000:raise ValueError('Unmatched camera timing')
+            # Native history returns the nearest real record on either side of
+            # the exposure query. Preserve its epoch; no local age/direction gate.
+            if start1!=sof1-exposure-19335 or head_ns>time.clock_gettime_ns(time.CLOCK_BOOTTIME):raise ValueError('Inconsistent exposure/pose timestamps')
             lengths=struct.unpack_from('<2I',raw,160);offsets=struct.unpack_from('<2I',raw,168)
             if lengths!=(614400,614400) or offsets!=(0,614400) or os.fstat(fds[0]).st_size!=1228800:raise ValueError('Invalid mosaic memory layout')
             required=fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL
