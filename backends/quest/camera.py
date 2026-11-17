@@ -112,11 +112,19 @@ class Frame:
     world_from_body:np.ndarray
     camera_clock_bracket_ns:int
     producer_pid:int
+    exposure_profile:str
 
 
 class FrameReceiver:
     """Listener must exist before second exporter connects. No socket takeover."""
-    def __init__(self,path):
+    def __init__(self,path,exposure_profile='kernel-phase2'):
+        if exposure_profile not in ('kernel-phase2','vr700-fixed-controls-v1'):
+            raise ValueError('Unsupported hand camera exposure profile')
+        if exposure_profile=='vr700-fixed-controls-v1':
+            compatible=Path('/proc/device-tree/compatible').read_bytes().split(b'\0')
+            if b'iqiyi,vr700' not in compatible:
+                raise ValueError('Fixed hand exposure profile requires VR700 hardware')
+        self.exposure_profile=exposure_profile
         self.path=Path(path);self.client=None;self.last_sequence=0
         if os.geteuid()!=0:raise PermissionError('Exporter authenticates a root-only listener')
         if self.path.exists():raise FileExistsError('Never replace another observer endpoint')
@@ -147,10 +155,16 @@ class FrameReceiver:
             if (magic,version,size,kind)!=(0x43494e41,3,216,2) or seq<=self.last_sequence:raise ValueError('Bad frame ABI/sequence')
             if not 0<=receive-sent<=100_000_000:raise ValueError('Stale shared frame')
             width,height,stride,frame0,frame1,valid=struct.unpack_from('<6I',raw,32)
-            if (width,height,stride)!=(640,480,1280) or valid&15!=15:raise ValueError('Image/QCFT/head pose validity missing')
+            if (width,height,stride)!=(640,480,1280) or valid&7!=7:raise ValueError('Image/QCFT/head pose validity missing')
             sof0,sof1,start1,exposure,head_ns,bracket=struct.unpack_from('<6Q',raw,56);phase=struct.unpack_from('<I',raw,188)[0]
-            if phase!=2:raise ValueError('Hand input needs the scheduled long-exposure phase')
-            if not 0<exposure<1_000_000_000 or abs(sof0-sof1)>1_000_000 or bracket>=5000:raise ValueError('Unmatched camera timing')
+            if self.exposure_profile=='vr700-fixed-controls-v1':
+                # Bit16 records equal fixed controls read back before STREAMON,
+                # not kernel schedule validity (bit8) or optical calibration.
+                if valid!=23 or phase!=0xffffffff or any(struct.unpack_from('<3Q',raw,192)):
+                    raise ValueError('Fixed hand input requires explicit controls and no exposure schedule')
+            elif valid&15!=15 or valid&16 or phase!=2:
+                raise ValueError('Hand input needs the scheduled long-exposure phase')
+            if not head_ns or not 0<exposure<1_000_000_000 or min(sof0,sof1)<=exposure+19335 or abs(sof0-sof1)>1_000_000 or bracket>=5000:raise ValueError('Unmatched camera timing')
             if start1!=sof1-exposure-19335 or not 0<=start1-head_ns<20_000_000:raise ValueError('Inconsistent exposure/pose timestamps')
             lengths=struct.unpack_from('<2I',raw,160);offsets=struct.unpack_from('<2I',raw,168)
             if lengths!=(614400,614400) or offsets!=(0,614400) or os.fstat(fds[0]).st_size!=1228800:raise ValueError('Invalid mosaic memory layout')
@@ -161,7 +175,7 @@ class FrameReceiver:
             mosaics=np.frombuffer(data,np.uint8).reshape(2,480,1280);images=[mosaics[i,:,:640].copy() if j==0 else mosaics[i,:,640:].copy() for i in range(2) for j in range(2)]
             position=np.array(struct.unpack_from('<3d',raw,104));quat=struct.unpack_from('<4d',raw,128)
             start0=sof0-exposure-19335;self.last_sequence=seq
-            return Frame(images,seq,(frame0,frame1),sent,receive,(sof0,sof1),(start0,start1),(start0+exposure//2,start1+exposure//2),exposure,phase,head_ns,quaternion_transform(position,quat),bracket,self.producer_pid)
+            return Frame(images,seq,(frame0,frame1),sent,receive,(sof0,sof1),(start0,start1),(start0+exposure//2,start1+exposure//2),exposure,phase,head_ns,quaternion_transform(position,quat),bracket,self.producer_pid,self.exposure_profile)
         finally:
             for fd in fds:os.close(fd)
 

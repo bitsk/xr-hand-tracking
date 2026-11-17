@@ -16,10 +16,11 @@ from pipeline_client import PipelineClient
 from decoder import DPEHostStages,model_geometry,prepare_temporal_memory,recover_world_wrist
 
 p=argparse.ArgumentParser(description=__doc__)
+p.add_argument('--camera-exposure-profile',choices=('kernel-phase2','vr700-fixed-controls-v1'),default='kernel-phase2')
 p.add_argument('--assets',type=Path,required=True);p.add_argument('--state-socket',required=True);p.add_argument('--camera-socket',default='/run/quest-hand-camera/input.sock');p.add_argument('--calibration',required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--frames',type=int,default=300);p.add_argument('--seconds',type=float,default=60);p.add_argument('--detector-period',type=float,default=1.0);p.add_argument('--detect-threshold',type=float,default=.6);p.add_argument('--exist-threshold',type=float,default=.5);p.add_argument('--save-every',type=int,default=30);p.add_argument('--roi-file',type=Path,help='Observed human-annotated initializer; never represents automatic detection');p.add_argument('--exercise-inactive',action='store_true',help='Exercise both DSP stages on real pixels when no hand is detected; all inactive slots remain invalid');p.add_argument('--compute-only',action='store_true',help='Fixed ROIs on current real camera pixels; always invalid, no tracking claim');a=p.parse_args()
 assert 0<=a.frames<=10000 and 0<=a.seconds<=3600 and a.detector_period>0 and a.save_every>=0
 assert not a.compute_only or a.roi_file,'Compute-only requires explicit fixed source windows'
-a.output.mkdir(parents=True,exist_ok=True);cal=Calibration.load(a.calibration,rig_convention='rig-to-camera');host=DPEHostStages(a.assets);receiver=FrameReceiver(a.camera_socket)
+a.output.mkdir(parents=True,exist_ok=True);cal=Calibration.load(a.calibration,rig_convention='rig-to-camera');host=DPEHostStages(a.assets);receiver=FrameReceiver(a.camera_socket,a.camera_exposure_profile)
 manual_document=json.loads(a.roi_file.read_text()) if a.roi_file else None
 manual_rois=manual_document.get('rois') if isinstance(manual_document,dict) else manual_document
 if manual_rois is not None:
@@ -92,7 +93,7 @@ try:
    if epoch_changed:
     memory[:]=0;use_memory[:]=False;active[:]=False;previous_e=None;landmarks=None;last_detection=-1e9
    last_seq=f.sequence;last_producer=f.producer_pid;last_exposure=exposure;last_world=f.world_from_body.copy()
-   base={'sequence':f.sequence,'producer_pid':f.producer_pid,'history_reset':epoch_changed,'clock_bridge_bracket_ns':clock_end-frame_start,'source_frame_ids':f.source_frame_ids,'exposure_phase':f.exposure_phase,'exposure_start_boottime_ns':f.exposure_start_boottime_ns,'exposure_center_boottime_ns':f.exposure_center_boottime_ns,'head_pose_boottime_ns':f.head_pose_boottime_ns,'camera_clock_bracket_ns':f.camera_clock_bracket_ns,'source_received_monotonic_ns':f.received_monotonic_ns,'processing_start_monotonic_ns':frame_start,'stage':'candidate_only','calibration_optically_verified':False,'nimble_equivalence_verified':False,'private_confidence_policy_recovered':False,'physical_wearer_verified':False,'valid_until_boottime_ns':exposure+250_000_000}
+   base={'sequence':f.sequence,'producer_pid':f.producer_pid,'history_reset':epoch_changed,'clock_bridge_bracket_ns':clock_end-frame_start,'source_frame_ids':f.source_frame_ids,'exposure_phase':f.exposure_phase,'camera_exposure_profile':f.exposure_profile,'exposure_start_boottime_ns':f.exposure_start_boottime_ns,'exposure_center_boottime_ns':f.exposure_center_boottime_ns,'head_pose_boottime_ns':f.head_pose_boottime_ns,'camera_clock_bracket_ns':f.camera_clock_bracket_ns,'source_received_monotonic_ns':f.received_monotonic_ns,'processing_start_monotonic_ns':frame_start,'stage':'candidate_only','calibration_optically_verified':False,'nimble_equivalence_verified':False,'private_confidence_policy_recovered':False,'physical_wearer_verified':False,'valid_until_boottime_ns':exposure+250_000_000}
    if not 0<=now_boot-exposure<=250_000_000:
     memory[:]=0;use_memory[:]=False;active[:]=False;previous_e=None;landmarks=None;last_detection=-1e9
     base.update(hands=[{'hand':h,'valid':False,'reason':'stale_camera_group'} for h in [0,1]]);log.write(json.dumps(safe(base))+'\n');log.flush();continue

@@ -18,6 +18,8 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--config',type=Path,required=True);a=p.parse_args()
     c=json.loads(a.config.read_text())
     if c.get('schema')!=1 or c.get('backend')!='quest-dsp':raise ValueError('Unsupported hand configuration')
+    if c.get('camera_exposure_profile','kernel-phase2') not in ('kernel-phase2','vr700-fixed-controls-v1'):
+        raise ValueError('Unsupported hand camera exposure profile')
     if os.geteuid()!=0 or os.uname().machine!='aarch64':raise RuntimeError('Backend requires native arm64 FastRPC privileges')
     assets=Path(c['assets']);verified_assets(assets)
     if not Path(c['calibration']).is_file():raise FileNotFoundError('Private camera calibration must be configured')
@@ -81,6 +83,7 @@ def run_backend(c,assets,run,logdir,stopped):
             raise RuntimeError('DSP did not become ready; see the system journal')
         worker_path=Path(__file__).resolve().parents[2]/'backends/quest/worker.py'
         command=[sys.executable,str(worker_path),'--assets',str(assets),'--camera-socket',c['camera_socket'],'--state-socket',c['state_socket'],'--calibration',c['calibration'],'--output',str(logdir),'--frames','0','--seconds','0','--save-every','0','--detector-period',str(c.get('detector_period',1.))]
+        command+=['--camera-exposure-profile',c.get('camera_exposure_profile','kernel-phase2')]
         if c.get('exercise_inactive',False):command.append('--exercise-inactive')
         worker=subprocess.Popen(command,env=env)
         print(json.dumps({'kind':'hand_service_ready','backend':'quest-dsp','worker_pid':worker.pid,'state_socket':c['state_socket']}),flush=True)
